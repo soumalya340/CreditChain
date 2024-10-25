@@ -56,7 +56,6 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-// Dummy data with id for each row
 const data: DataType[] = Array.from({ length: 10 }, (_, index) => ({
   key: index,
   id: index,

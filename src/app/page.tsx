@@ -73,6 +73,15 @@ export default function Home() {
     }
   }, [lendingAmount, lendingMonths]);
 
+
+  const borrow = () =>{
+    console.log('borrow clicked');
+    localStorage.setItem('borrowAmount', borrowAmount);
+    localStorage.setItem('borrowMonths', borrowMonths.toString());
+    window.location.href = '/createaccount';
+  
+  }
+
   const renderBar = (amount: number, extra: number) => {
     const total = amount + extra;
     const percentAmount = ((amount / total) * 100).toFixed(2);
@@ -151,7 +160,7 @@ export default function Home() {
                   )}
 
                   {address && (
-                    <button className="mt-5 bg-blue-600 text-white px-4 py-2 rounded-full">
+                    <button onClick={borrow} className="mt-5 bg-blue-600 text-white px-4 py-2 rounded-full">
                       Borrow Now
                     </button>
                   )}
@@ -273,38 +282,4 @@ export default function Home() {
   );
 }
 
-// export const metadata = {
-//   title: "Home - Simple",
-//   description: "Page description",
-// };
 
-// export default function Home() {
-//   return (
-//     <>
-
-//     </>
-//   );
-// }
-
-// app/page.tsx
-
-// "use client";
-
-// import { useAccount } from "wagmi";
-
-// export default function Home() {
-//   const { isConnected } = useAccount();
-
-//   return (
-//     <main className="min-h-screen px-8 py-0 pb-12 flex-1 flex flex-col items-center bg-white">
-//       <header className="w-full py-4 flex justify-between items-center">
-//         <div className="flex items-center">
-//           <div className="hidden sm:inline text-xl font-bold">reown AppKit example app</div>
-//         </div>
-//         <div className="flex items-center">
-//           <w3m-button />
-//         </div>
-//       </header>
-//     </main>
-//   );
-// }

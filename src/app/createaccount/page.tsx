@@ -5,6 +5,7 @@ import { Steps, Form, Input, Button, Upload, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import Navbar from '@/components/Navbar';
 import { ReclaimProofRequest } from '@reclaimprotocol/js-sdk';
+import Checkbox from 'antd/es/checkbox/Checkbox';
 
 const { Step } = Steps;
 const { Option } = Select;
@@ -27,6 +28,14 @@ export default function CreateAccount() {
   const [linkedInProof, setLinkedInProof] = useState<any>(null);
   const [instagramProof, setInstagramProof] = useState<any>(null);
   const [xUsernameProof, setXUsernameProof] = useState<any>(null);
+
+  useEffect(() => {
+    const loanamount = localStorage.getItem('loanAmount')
+  });
+
+  const doneclick = () => {
+    window.location.href = '/success';
+  }
 
   // Verification handler functions
   const handleAadharVerification = async () => {
@@ -218,18 +227,20 @@ export default function CreateAccount() {
       ),
     },
     {
-      title: 'Proof of Payback',
+      title: 'Confirm',
       content: (
         <Form layout="vertical">
-          <Form.Item label="Upload Previous Loan Clearance Proof">
-            <Upload>
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload>
-          </Form.Item>
-          <Form.Item label="Loan Amount">
-            <Input placeholder="Enter the previous loan amount" />
-          </Form.Item>
-        </Form>
+  <Form.Item label="Loan Amount">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <Checkbox>
+        By checking this, you are confirming that you are agreeing to our{' '}
+        <span style={{ color: 'blue', textDecoration: 'underline' }}>
+          terms and conditions
+        </span>
+      </Checkbox>
+    </div>
+  </Form.Item>
+</Form>
       ),
     },
   ];
@@ -318,7 +329,7 @@ export default function CreateAccount() {
               Next
             </Button>
           ) : (
-            <Button className="bg-green-500 text-white">Done</Button>
+            <Button onClick={doneclick} className="bg-green-500 text-white">Done</Button>
           )}
         </div>
       </div>
